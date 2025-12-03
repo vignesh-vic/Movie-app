@@ -1,7 +1,15 @@
-import React from 'react'
+import React, {  useEffect } from 'react'
 import { IoIosSearch } from "react-icons/io";
+const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+const baseUrl = import.meta.env.API_BASE_URL;
+
+
+
 
 const Search = ({ searchTerm, setSearchTerm }) => {
+
+
+
   return (
     <div className='flex justify-center '>
         <div className='flex gap-2  items-center border  w-[330px]  border-gray-400 rounded-md'>
