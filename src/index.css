@@ -1,14 +1,9 @@
 @import "tailwindcss";
 
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body{
-    font-family: 'franklin gothic medium', 'arial narrow', Arial, sans-serif;
+    font-family:  Arial, sans-serif;
     background-color: #151515;
 }
 
