@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import Search from './components/Search';
 import Spinner from './components/Spinner';
+import MovieCard from './components/MovieCard';
 const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -67,7 +68,7 @@ const fetchSearchMovies = async (query) => {
         <h2 className='title'> <span className='text-purple-400'>Movies</span> You'll Enjoy Without the Hassle</h2>
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
        </header>
-       <section className='flex justify-center'>
+        <section className='px-20'>
        <div>
             <h1 className=' text-white mt-5 mb-5 text-xl '>All Movies</h1>
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
@@ -75,18 +76,11 @@ const fetchSearchMovies = async (query) => {
               isLoading ? (
                 <Spinner />
               ) : errorMessage ? (<p className="text-red-500">{errorMessage}</p>) : (
-                <div className='flex flex-col gap-4'>
-                  {
-                    movieList.length > 0
-                    &&
-                    movieList.map((movie) => (
-                      <p className='font-normal text-white'>{movie.title}</p>
-
-                    )
-                    )
-
-                  }
-                </div>
+                  <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-x-6">
+                    {movieList.map(movie => (
+                     <MovieCard key={movie.id} movie={movie}/>
+                    ))}
+                  </div>
               )
             }
        </div>
