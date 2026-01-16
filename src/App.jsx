@@ -4,9 +4,9 @@ import './App.css'
 import Search from './components/Search';
 import Spinner from './components/Spinner';
 import MovieCard from './components/MovieCard';
+import { useDebounce } from 'react-use';
 const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
-
 const APi_OPTIONS = {
   method: 'GET',
   headers: {
@@ -30,7 +30,15 @@ const [searchTerm, setSearchTerm] = useState("");
 const [errorMessage, setErrorMessage] = useState("");
 const [movieList, setMovieList] = useState([]);
 const [isLoading, setIsLoading] = useState(false);
+const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
+useDebounce(
+  () => {
+    setDebouncedSearchTerm(searchTerm);
+  },
+  500,
+  [searchTerm]
+);
 
 const fetchSearchMovies = async (query) => {
   setIsLoading(true);
@@ -55,9 +63,11 @@ const fetchSearchMovies = async (query) => {
     }
   
   }
+
   useEffect(() => {
-    fetchSearchMovies(searchTerm)
-  }, [searchTerm]);
+    fetchSearchMovies(debouncedSearchTerm)
+  }, [debouncedSearchTerm]);
+
 
 
   return (
